@@ -1,14 +1,14 @@
 #+ summary: select the equivalent URIs for a uniprot entry from bioregistry SPARQL endpoing
 #+ endpoint: https://bioregistry.io/sparql
 #+ tags: 
-#+  - identifiers
+#+   - identifiers
 #+ defaults:
 #+   - protein_iri: http://identifiers.org/uniprot/P01308
 
 SELECT DISTINCT ?input_uri ?mapped_uri
 WHERE {
     VALUES ?input_uri { 
-        ?_protein_iri .
+        ?__protein_iri .
     }
     SERVICE <https://bioregistry.io/sparql> {
         ?input_uri owl:sameAs ?mapped_uri.
