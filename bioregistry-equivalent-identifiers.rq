@@ -2,7 +2,7 @@
 #+ endpoint: https://bioregistry.io/sparql
 #+ tags: 
 #+   - identifiers
-
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 SELECT DISTINCT ?input_iri ?mapped_uri
 {
     VALUES ?input_iri { 
