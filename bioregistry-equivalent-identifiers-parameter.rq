@@ -1,12 +1,12 @@
-#+ summary: select the equivalent URIs for a uniprot entry from bioregistry SPARQL endpoing
+#+ summary: use bioregistry SPARQL endpoint to get equivalent iris for an input iri
 #+ endpoint: https://bioregistry.io/sparql
 #+ tags: 
-#+   - identifiers
+#+   - identifier_mapping
 #+ defaults:
 #+   - input: http://identifiers.org/uniprot/P01308
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT DISTINCT ?input_iri ?mapped_uri
+SELECT DISTINCT ?_input_iri ?mapped_uri
 {
-    
+    # VALUES ?_input_iri {<http://identifiers.org/uniprot/P01308>}
     ?_input_iri owl:sameAs ?mapped_uri.
 }
