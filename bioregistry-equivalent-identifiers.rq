@@ -2,15 +2,11 @@
 #+ endpoint: https://bioregistry.io/sparql
 #+ tags: 
 #+   - identifiers
-#+ defaults:
-#+   - protein_iri: http://identifiers.org/uniprot/P01308
 
-SELECT DISTINCT ?input_uri ?mapped_uri
-WHERE {
-    VALUES ?input_uri { 
-        ?__protein_iri .
-    }
-    SERVICE <https://bioregistry.io/sparql> {
-        ?input_uri owl:sameAs ?mapped_uri.
-    }
+SELECT DISTINCT ?input_iri ?mapped_uri
+{
+    VALUES ?input_iri { 
+        <http://identifiers.org/uniprot/P01308>
+    }  
+    ?input_iri owl:sameAs ?mapped_uri.
 }
