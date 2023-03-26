@@ -3,6 +3,6 @@ A collection of my SPARQL queries
 
 Each SPARQL query is annotated with the [GRLC decorator syntax](https://github.com/CLARIAH/grlc#decorator-syntax)
 
-You can view the collection at the [GRLC.io endpoint](http://grlc.io/api-git/micheldumontier/sparql-queries)
+You can use the auto-generated [GRLC.io API](http://grlc.io/api-git/micheldumontier/sparql-queries) to try out the queries.
 
-These should also be indexed at [Shapes of You](http://index.semanticscience.org/)
+The queries will also eventually be indexed at [Shapes of You](http://index.semanticscience.org/)
