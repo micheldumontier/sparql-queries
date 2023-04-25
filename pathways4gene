@@ -1,0 +1,21 @@
+#+ summary: get the pathways for a particular gene
+#+ description: uses kg hub for gene name search, bioregistry for an http/https identifier correction, and wikipathways
+#+ endpoint: https://sparql.wikipathways.org/sparql
+
+PREFIX bl: <https://w3id.org/biolink/vocab/>
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT DISTINCT ?pathway ?pathwayLabel
+{
+    SERVICE <http://kg-hub-rdf.berkeleybop.io/blazegraph/sparql> {
+      ?gene bl:category bl:Gene ;
+      rdfs:label ?geneLabel .
+      FILTER(?geneLabel = "AP2B1")
+    } 
+    SERVICE <https://bioregistry.io/sparql> {
+    	?gene owl:sameAs ?geneHttps . 
+	}
+	SERVICE <https://sparql.wikipathways.org/sparql> {
+		?geneHttps dct:isPartOf ?pathway .
+		?pathway dc:title ?pathwayLabel .
+	}
+}
