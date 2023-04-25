@@ -1,0 +1,32 @@
+#+ summary:  Identify potential side effects of Imatinib from knockout models of target gene in mice
+#+ description: uses drugbank, hgnc, mgd, and MP ontology
+#+ endpoint: https://bio2rdf.org/sparql
+
+PREFIX mp: <http://purl.obolibrary.org/obo/MP_>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT distinct ?phenotype_label
+{
+SERVICE <http://drugbank.bio2rdf.org/sparql> {
+    ?drug <http://bio2rdf.org/drugbank_vocabulary:target> ?target .
+    FILTER(?drug = <http://bio2rdf.org/drugbank:DB00619>)
+    ?target <http://bio2rdf.org/drugbank_vocabulary:x-hgnc> ?hgnc .
+   }
+  SERVICE <http://hgnc.bio2rdf.org/sparql> {
+    ?hgnc <http://bio2rdf.org/hgnc_vocabulary:x-mgi> ?marker .
+   }    
+  SERVICE <http://mgi.bio2rdf.org/sparql> {
+    ?model <http://bio2rdf.org/mgi_vocabulary:marker> ?marker .
+    ?model <http://bio2rdf.org/mgi_vocabulary:allele> ?all .
+    ?all <http://bio2rdf.org/mgi_vocabulary:allele-attribute> ?allele_type .
+    ?model <http://bio2rdf.org/mgi_vocabulary:phenotype> ?phenotypes .
+    FILTER (str(?allele_type) = "Null/knockout") 
+   }
+
+    SERVICE <http://bioportal.bio2rdf.org/sparql> {
+    ?mp owl:sameAs ?phenotypes . 
+    ?mp rdfs:label ?phenotype_label .
+    ?mp rdfs:subClassOf* mp:0005385
+   }
+ }
