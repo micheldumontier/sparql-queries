@@ -1,0 +1,23 @@
+#+ summary: Get drugs, their targets, and the target's gene ontology annotations
+#+ endpoint: http://bio2rdf.org/sparql
+
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX dv: <http://bio2rdf.org/drugbank_vocabulary:>
+PREFIX hv: <http://bio2rdf.org/hgnc_vocabulary:>
+PREFIX goa: <http://bio2rdf.org/goa_vocabulary:>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT *
+{
+   ?drug a dv:Drug .
+   ?drug dv:target ?target .
+   ?target dv:x-hgnc ?hgnc .
+   ?hgnc hv:x-uniprot ?uniprot .
+   ?uniprot ?p ?go .
+   FILTER (?p = goa:process || ?p = goa:component || ?p = goa:function)
+  
+   ?drug dct:title ?druglabel .
+   ?target dct:title ?target_name .
+   ?go dct:title ?golabel .
+}
