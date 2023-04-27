@@ -19,7 +19,7 @@ SELECT DISTINCT ?pathway ?pathwayLabel
     	?gene owl:sameAs ?geneHttps . 
     }
     SERVICE <https://sparql.wikipathways.org/sparql> {
-	?gene dct:isPartOf ?pathway .
+	?geneHttps dct:isPartOf ?pathway .
 	?pathway dc:title ?pathwayLabel .
     }
 }
